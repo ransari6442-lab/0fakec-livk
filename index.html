@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Learning Page Builder</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 35px 15px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#10152e,#22245b,#392b78);
+  background-size: 300% 300%;
+  animation: backgroundMove 12s ease infinite;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+@keyframes backgroundMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.blob {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  filter: blur(65px);
+  opacity: .35;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite alternate;
+}
+
+.blob.one {
+  background: #6366f1;
+  top: 5%;
+  left: -90px;
+}
+
+.blob.two {
+  background: #06b6d4;
+  right: -90px;
+  bottom: 5%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  from {transform: translateY(-20px);}
+  to {transform: translateY(40px);}
+}
+
+.container {
+  position: relative;
+  max-width: 540px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 22px;
+  background: rgba(255,255,255,.10);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+  animation: appear .9s ease both;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.header .icon {
+  font-size: 40px;
+  display: inline-block;
+  margin-bottom: 12px;
+  animation: bounce 2.5s infinite;
+}
+
+@keyframes bounce {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-9px);}
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 9px;
+  background: linear-gradient(90deg,#fff,#a5b4fc,#67e8f9);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #d1d5ff;
+  line-height: 1.6;
+}
+
+.logo-box {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo-preview {
+  width: 105px;
+  height: 105px;
+  border: 2px dashed #a5b4fc;
+  border-radius: 20px;
+  margin: auto auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #d1d5ff;
+  background: rgba(255,255,255,.08);
+  transition: .3s;
+}
+
+.logo-preview:hover {
+  transform: scale(1.06) rotate(2deg);
+  border-color: #67e8f9;
+}
+
+.logo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 19px 0 8px;
+  color: #f1f5ff;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.23);
+  border-radius: 11px;
+  background: rgba(15,23,42,.45);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: .3s;
+}
+
+input::placeholder {
+  color: #a5b4cc;
+}
+
+input:focus {
+  border-color: #67e8f9;
+  box-shadow: 0 0 0 3px rgba(103,232,249,.13);
+  transform: translateY(-2px);
+}
+
+input[type="file"] {
+  background: transparent;
+  border: none;
+  padding: 5px;
+}
+
+input[type="file"]::file-selector-button {
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 26px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(90deg,#6366f1,#8b5cf6,#06b6d4);
+  background-size: 200% auto;
+  box-shadow: 0 8px 25px rgba(99,102,241,.35);
+  transition: .3s;
+  animation: buttonGlow 3s infinite;
+}
+
+@keyframes buttonGlow {
+  0%,100% {box-shadow: 0 5px 20px rgba(99,102,241,.3);}
+  50% {box-shadow: 0 5px 30px rgba(6,182,212,.5);}
+}
+
+button:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+.note {
+  margin-top: 19px;
+  padding: 13px;
+  background: rgba(251,146,60,.12);
+  border: 1px solid rgba(251,146,60,.25);
+  border-radius: 10px;
+  font-size: 12px;
+  color: #fed7aa;
+  line-height: 1.6;
+}
+
+#status {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: #a5f3fc;
+  line-height: 1.5;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 22px;
+  color: #c7d2fe;
+  font-size: 11px;
+}
+
+@media(max-width:480px) {
+  .container {
+    padding: 22px 18px;
+  }
+  h1 {font-size: 23px;}
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="blob one"></div>
+<div class="blob two"></div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="icon">🎓</div>
+    <h1>E-Learning Builder</h1>
+    <p class="subtitle">
+      Create your professional Telegram learning page
+    </p>
+  </div>
+
+  <form id="builderForm">
+
+    <div class="logo-box">
+      <div class="logo-preview" id="logoPreview">
+        Your Logo
+      </div>
+
+      <label for="logo">Upload Your Logo</label>
+      <input type="file" id="logo" accept="image/*">
+    </div>
+
+    <label for="pageName">Your Name / Page Header</label>
+    <input type="text" id="pageName"
+      placeholder="Enter your page name" required>
+
+    <label for="username">Telegram Username</label>
+    <input type="text" id="username"
+      placeholder="@yourusername" required>
+
+    <label for="channelName">Your Channel Name</label>
+    <input type="text" id="channelName"
+      placeholder="Enter channel name" required>
+
+    <label for="botToken">Telegram Bot Token</label>
+    <input type="password" id="botToken"
+      placeholder="Enter bot token" required>
+
+    <label for="channelLink">Telegram Channel Link</label>
+    <input type="url" id="channelLink"
+      placeholder="https://t.me/yourchannel" required>
+
+    <label for="pixelId">Meta Pixel ID</label>
+    <input type="text" id="pixelId"
+      placeholder="Enter Pixel ID">
+
+    <label for="capiToken">CAPI Access Token</label>
+    <input type="password" id="capiToken"
+      placeholder="Enter CAPI token">
+
+    <label for="testCode">Test Event Code</label>
+    <input type="text" id="testCode"
+      placeholder="Enter test event code">
+
+    <button type="submit">
+      ✨ BUILD MY PAGE
+    </button>
+
+    <div id="status"></div>
+
+  </form>
+
+  <div class="note">
+    🔒 Security Notice: Bot Token और CAPI Token को
+    सुरक्षित Backend में ही रखना चाहिए। इन्हें HTML
+    या सार्वजनिक JavaScript में स्टोर न करें।
+  </div>
+
+  <div class="footer">
+    E-Learning Page Builder
+  </div>
+
+</div>
+
+<script>
+const logoInput = document.getElementById("logo");
+const logoPreview = document.getElementById("logoPreview");
+
+logoInput.addEventListener("change", function() {
+  const file = this.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please select a valid image.");
+    this.value = "";
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Please select an image under 2 MB.");
+    this.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const img = document.createElement("img");
+    img.src = e.target.result;
+    img.alt = "Logo";
+    logoPreview.replaceChildren(img);
+  };
+
+  reader.readAsDataURL(file);
+});
+
+document.getElementById("builderForm")
+.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const status = document.getElementById("status");
+
+  status.textContent =
+    "✨ Form validated! Secure backend integration is required to build your page.";
+});
+</script>
+
+</body>
+</html>
